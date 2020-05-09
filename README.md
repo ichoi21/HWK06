@@ -40,3 +40,4 @@ You are required to submit the following for review:
 - JS ajax loaded with OWM - displays call back into HTML
 - new way to simplify URL for API
 - CSS onto UV
+- 5 Day Forecast functional

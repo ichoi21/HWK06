@@ -87,15 +87,14 @@ $(document).ready(function () {
 
       $.ajax({
         type: "GET",
-        url:
-          API + "forecast?q=" + name + "," + countryCode + units + cnt + APIid,
+        url: API + "forecast?q=" + name + "," + countryCode + units + APIid,
         dataType: "json",
       }).then(function (forecastResponse) {
         console.log(forecastResponse);
         var fRes = forecastResponse;
         var fArr = [];
 
-        for (var i = 0; i < 6; i += 13) {
+        for (var i = 0; i < 40; i += 8) {
           var fObj = {};
           var fResDate = fRes.list[i].dt_txt;
           var fDate = new Date(fResDate).toLocaleDateString("en-US");
