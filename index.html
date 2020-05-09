@@ -21,7 +21,46 @@
 
     <div class="container-fluid h-100">
       <div class="row min-vh-100">
-        <div class="col-md-4 bg-light"></div>
+        <div class="col-md-4 bg-light">
+          <div class="row">
+            <div class="col-md-8" id="city-search">
+              <label class="font-weight-bold pt-2" for="city-search"
+                >Search for a City:</label
+              >
+              <div class="input-group mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="search-input"
+                  placeholder="Enter City Name"
+                />
+                <div class="input-group-append">
+                  <button
+                    class="btn btn-outline-primary fas fa-search"
+                    type="button"
+                    id="btnSearch"
+                  ></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-10 h-100 pb-3" id="history">
+              <div class="card w-100">
+                <ul
+                  class="list-group list-group-flush"
+                  id="search-history"
+                ></ul>
+              </div>
+              <div class="d-flex justify-content-end pt-3" id="btnClear-row">
+                <button
+                  class="btn btn-outline-danger fas fa-trash"
+                  id="btnClear"
+                ></button>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="col-md-8" id="weather-display"></div>
       </div>
     </div>
