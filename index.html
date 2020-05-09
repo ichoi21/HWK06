@@ -21,6 +21,7 @@
 
     <div class="container-fluid h-100">
       <div class="row min-vh-100">
+        <!-- Left User Input/History -->
         <div class="col-md-4 bg-light">
           <div class="row">
             <div class="col-md-8" id="city-search">
@@ -28,19 +29,18 @@
                 >Search for a City:</label
               >
               <div class="input-group mb-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="citySearch"
-                  placeholder="Enter City Name"
-                />
-                <div class="input-group-append">
+                <form>
+                  <input
+                    type="text"
+                    id="citySearch"
+                    placeholder="Enter City Name"
+                  />
                   <button
                     class="btn btn-outline-primary fas fa-search"
                     type="button"
                     id="btnSearch"
                   ></button>
-                </div>
+                </form>
               </div>
             </div>
           </div>
@@ -61,12 +61,36 @@
             </div>
           </div>
         </div>
-        <div class="col-md-8" id="weather-display"></div>
+        <!-- Right Detailed Weather Display body -->
+        <div class="col-md-8" id="weather-display">
+          <!-- Current Weater and Condition -->
+          <div class="row pt-3" id="current-forecast">
+            <div class="col-md-12 border">
+              <div
+                class="d-flex align-items-center pt-4"
+                id="city-name"
+              >
+                <h2 class="font-weight-bold" id="cityName"></h2>
+                <div class="weatherImage">
+                  <img id="weatherImage" />
+                </div>
+              </div>
+              <div class="pb-4" id="currentWeather">
+                <div id="temperature"></div>
+                <div id="humidity"></div>
+                <div id="wind-speed"></div>
+                <div id="uv-index"></div>
+              </div>
+            </div>
+          </div>
+          <!-- Five Day Forecast + Details -->
+          <div class="row flex-column pt-3" id="5Dforecast">
+        </div>
       </div>
     </div>
 
     <footer class="text-center bg-dark sticky-footer small">
-      <div class="container" id="footer-container">
+      <div class="container" id="ftr">
         <span class="text-muted"
           >With the help of Google, OWM, open source, GitHub, and BCS put
           together by i21 &copy; 2020</span

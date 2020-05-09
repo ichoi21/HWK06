@@ -37,4 +37,5 @@ You are required to submit the following for review:
 - obtain all API sources like OpenWeatherMap
 - Review exactly what is required from png
 - Setup visual to HTML -Header/Left-Right Main/Footer matching sample PNG
-- JS ajax loaded with OWM
+- JS ajax loaded with OWM - displays call back into HTML
+- new way to simplify URL for API
