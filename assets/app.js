@@ -26,9 +26,9 @@ $(document).ready(function () {
       type: "GET",
       url: API + "weather?q=" + citySearch + units + APIid,
       dataType: "json",
-    }).then(function (result) {
+    }).then(function (response) {
       $("#current-forecast").show();
-      var res = result;
+      var res = response;
       console.log(res);
       console.log((temp = Math.floor(res.main.temp)));
       var name = res.name;
@@ -38,8 +38,9 @@ $(document).ready(function () {
       var temp = Math.floor(res.main.temp);
       var humidity = res.main.humidity;
       var windSpeed = res.wind.speed;
-
-      var countryCode = res.sys.country;
+      var lat = res.coord.lat;
+      var lon = res.coord.lon;
+      // var countryCode = res.sys.country;
 
       $("#cityName").text(name + " (" + date + ") ");
       $("#icon").attr(
@@ -50,22 +51,38 @@ $(document).ready(function () {
       $("#temperature").html("<b>Temperature: </b>" + temp + " °F");
       $("#humidity").html("<b>Humidity: </b>" + humidity + "%");
       $("#windSpeed").html("<b>Wind Speed: </b>" + windSpeed + " MPH");
+
+      // City UV
+
+      $.ajax({
+        type: "GET",
+        url: API + "uvi?lat=" + lat + "&lon=" + lon + APIid,
+        dataType: "json",
+      }).then(function (uvResponse) {
+        console.log(uvResponse);
+        var uvRes = uvResponse;
+
+        $("#uv-index").html(
+          "<b>UV Index: </b>" +
+            '<span class="badge badge-light" id="uvColor">' +
+            uvRes.value +
+            "</span>"
+        );
+
+        if (uvRes < 3) {
+          $("#uvColor").css("background-color", "green");
+        } else if (uvRes < 6) {
+          $("#uvColor").css("background-color", "yellow");
+        } else if (uvRes < 8) {
+          $("#uvColor").css("background-color", "orange");
+        } else if (uvRes < 11) {
+          $("#uvColor").css("background-color", "red");
+        } else {
+          $("#uvColor").css("background-color", "violet");
+        }
+      });
     });
   }
-  //City UV
-
-  // var lat = res.coord.lat;
-  // var lon = res.coord.lon;
-
-  // $.ajax({
-  //   type: "GET",
-  //   url: `https://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lat=${lon}&appid=${APIid}`,
-  //   dataType: "json",
-  // }).then(function (res) {
-  //   console.log(res);
-
-  //   $("#cityName").text(name);
-  // });
   // //City Forecast
 
   // $.ajax({
