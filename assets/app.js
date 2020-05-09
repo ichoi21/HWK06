@@ -98,13 +98,15 @@ $(document).ready(function () {
           var fObj = {};
           var fResDate = fRes.list[i].dt_txt;
           var fDate = new Date(fResDate).toLocaleDateString("en-US");
-          var fTemp = fRes.list[i].main.temp;
+          var fTempl = fRes.list[i].main.temp_min;
+          var fTemph = fRes.list[i].main.temp_max;
           var fHumidity = fRes.list[i].main.humidity;
           var fIcon = fRes.list[i].weather[0].icon;
 
           fObj["list"] = {};
           fObj["list"]["date"] = fDate;
-          fObj["list"]["temp"] = fTemp;
+          fObj["list"]["temp_min"] = fTempl;
+          fObj["list"]["temp_max"] = fTemph;
           fObj["list"]["humidity"] = fHumidity;
           fObj["list"]["icon"] = fIcon;
 
@@ -115,12 +117,19 @@ $(document).ready(function () {
           var fArrDate = fArr[j].list.date;
           var fIconURL =
             "http://openweathermap.org/img/wn/" + fArr[j].list.icon + ".png";
-          var fArrTemp = Math.floor(fArr[j].list.temp);
+          var fArrTempl = Math.floor(fArr[j].list.temp_min);
+          var fArrTemph = Math.floor(fArr[j].list.temp_max);
           var fArrHumidity = fArr[j].list.humidity;
 
           $("#d-" + (j + 1)).text(fArrDate);
           $("#img-" + (j + 1)).attr("src", fIconURL);
-          $("#t-" + (j + 1)).text("Temp: " + Math.floor(fArrTemp) + " °F");
+          $("#t-" + (j + 1)).text(
+            "Temp: " +
+              Math.floor(fArrTempl) +
+              " °F/" +
+              Math.floor(fArrTemph) +
+              " °F"
+          );
           $("#hum-" + (j + 1)).text("Humidity: " + fArrHumidity + "%");
         }
         $("#5Dforecast").show();
