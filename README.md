@@ -41,3 +41,4 @@ You are required to submit the following for review:
 - new way to simplify URL for API
 - CSS onto UV
 - 5 Day Forecast functional
+- localStorage stored.

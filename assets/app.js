@@ -3,13 +3,19 @@ $(document).ready(function () {
 
   function init() {
     WeatherLook();
+    $("#5Dforecast").hide();
+    $("#history").hide();
+    clearHistory();
+    clickHistory();
+    displayHistory();
   }
 
   var citySearch;
   var APIid = "&appid=987370c9088242014b673e9c345ee3d9";
   var units = "&units=imperial";
-  var cnt = "&cnt=5";
+  // var cnt = "&cnt=5";
   var API = "https://api.openweathermap.org/data/2.5/";
+  var searchHistoryArr = [];
 
   function WeatherLook() {
     $("#btnSearch").on("click", function (e) {
@@ -28,7 +34,7 @@ $(document).ready(function () {
       url: API + "weather?q=" + citySearch + units + APIid,
       dataType: "json",
     }).then(function (response) {
-      $("#current-forecast").show();
+      $("#5Dforecast").show();
       var res = response;
       console.log(res);
       // console.log((temp = Math.floor(res.main.temp)));
@@ -42,6 +48,8 @@ $(document).ready(function () {
       var lat = res.coord.lat;
       var lon = res.coord.lon;
       var countryCode = res.sys.country;
+
+      localHistory(name);
 
       $("#cityName").text(name + " (" + date + ") ");
       $("#icon").attr(
@@ -132,9 +140,86 @@ $(document).ready(function () {
           );
           $("#hum-" + (j + 1)).text("Humidity: " + fArrHumidity + "%");
         }
-        $("#5Dforecast").show();
         console.log(fRes);
       });
+    });
+  }
+
+  function localHistory(citySearchName) {
+    var searchHistoryObj = {};
+
+    if (searchHistoryArr.length === 0) {
+      searchHistoryObj["city"] = citySearchName;
+      searchHistoryArr.push(searchHistoryObj);
+      localStorage.setItem("searchHistory", JSON.stringify(searchHistoryArr));
+    } else {
+      var checkHistory = searchHistoryArr.find(
+        ({ city }) => city === citySearchName
+      );
+
+      if (searchHistoryArr.length < 5) {
+        if (checkHistory === undefined) {
+          searchHistoryObj["city"] = citySearchName;
+          searchHistoryArr.push(searchHistoryObj);
+          localStorage.setItem(
+            "searchHistory",
+            JSON.stringify(searchHistoryArr)
+          );
+        }
+      } else {
+        if (checkHistory === undefined) {
+          searchHistoryArr.shift();
+          searchHistoryObj["city"] = citySearchName;
+          searchHistoryArr.push(searchHistoryObj);
+          localStorage.setItem(
+            "searchHistory",
+            JSON.stringify(searchHistoryArr)
+          );
+        }
+      }
+    }
+    $("#search-history").empty();
+    displayHistory();
+  }
+
+  function displayHistory() {
+    var getLocalSearchHistory = localStorage.getItem("searchHistory");
+    var localSearchHistory = JSON.parse(getLocalSearchHistory);
+
+    if (getLocalSearchHistory === null) {
+      createHistory();
+      getLocalSearchHistory = localStorage.getItem("searchHistory");
+      localSearchHistory = JSON.parse(getLocalSearchHistory);
+    }
+
+    for (var i = 0; i < localSearchHistory.length; i++) {
+      var historyLi = $("<li>");
+      historyLi.addClass("list-group-item");
+      historyLi.text(localSearchHistory[i].city);
+      $("#search-history").prepend(historyLi);
+      $("#history").show();
+    }
+    return (searchHistoryArr = localSearchHistory);
+  }
+
+  function createHistory() {
+    searchHistoryArr.length = 0;
+    localStorage.setItem("searchHistory", JSON.stringify(searchHistoryArr));
+  }
+
+  function clearHistory() {
+    $("#btnClear").on("click", function () {
+      $("#search-history").empty();
+      $("#history").hide();
+      localStorage.removeItem("searchHistory");
+      createHistory();
+    });
+  }
+
+  function clickHistory() {
+    $("#search-history").on("click", "li", function () {
+      var cityNameHistory = $(this).text();
+      getWeather(cityNameHistory);
     });
   }
 });
