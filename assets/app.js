@@ -30,12 +30,12 @@ $(document).ready(function () {
     }).then(function (response) {
       $("#current-forecast").show();
       var res = response;
-      // console.log(res);
+      console.log(res);
       // console.log((temp = Math.floor(res.main.temp)));
       var name = res.name;
       var date = new Date(res.dt * 1000).toLocaleDateString("en-US");
       var icon = res.weather[0].icon;
-      var weather = res.weather[0].main.description;
+      var weather = res.weather[0].description;
       var temp = Math.floor(res.main.temp);
       var humidity = res.main.humidity;
       var windSpeed = res.wind.speed;
@@ -48,7 +48,7 @@ $(document).ready(function () {
         "src",
         "http://openweathermap.org/img/wn/" + icon + ".png"
       );
-      $("#weather").html(weather);
+      $("#weather").html("<b>Description: </b>" + weather);
       $("#temperature").html("<b>Temperature: </b>" + temp + " °F");
       $("#humidity").html("<b>Humidity: </b>" + humidity + "%");
       $("#windSpeed").html("<b>Wind Speed: </b>" + windSpeed + " MPH");
@@ -119,9 +119,9 @@ $(document).ready(function () {
           var fArrHumidity = fArr[j].list.humidity;
 
           $("#d-" + (j + 1)).text(fArrDate);
-          $("#image-" + (j + 1)).attr("src", fIconURL);
-          $("#temp-" + (j + 1)).text("Temp: " + Math.floor(fArrTemp) + " °F");
-          $("#humidity-" + (j + 1)).text("Humidity: " + fArrHumidity + "%");
+          $("#img-" + (j + 1)).attr("src", fIconURL);
+          $("#t-" + (j + 1)).text("Temp: " + Math.floor(fArrTemp) + " °F");
+          $("#hum-" + (j + 1)).text("Humidity: " + fArrHumidity + "%");
         }
         $("#5Dforecast").show();
         console.log(fRes);
