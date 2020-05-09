@@ -9,19 +9,20 @@
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="assets/styles.css" />
+    <link rel="stylesheet" href="./assets/styles.css" />
     <title>Weather Dashboard</title>
   </head>
   <body>
-    <nav
+    <header
       class="navbar navbar-expand-lg navbar-light bg-dark justify-content-center"
     >
       <h3 class="text-light font-weight-bold">Weather Dashboard</h3>
-    </nav>
+    </header>
 
     <div class="container-fluid h-100">
       <div class="row min-vh-100">
         <div class="col-md-4 bg-light"></div>
+        <div class="col-md-8" id="weather-display"></div>
       </div>
     </div>
 
@@ -29,7 +30,7 @@
       <div class="container" id="footer-container">
         <span class="text-muted"
           >With the help of Google, OWM, open source, GitHub, and BCS put
-          together by i21 &copy; 2020 ></span
+          together by i21 &copy; 2020</span
         >
       </div>
     </footer>
@@ -53,6 +54,6 @@
       src="https://kit.fontawesome.com/a361b2e3ef.js"
       crossorigin="anonymous"
     ></script>
-    <script src="assets/app.js"></script>
+    <script src="./assets/app.js"></script>
   </body>
 </html>
