@@ -42,3 +42,4 @@ You are required to submit the following for review:
 - CSS onto UV
 - 5 Day Forecast functional
 - localStorage stored and grabs.
+- real time clock on display.

@@ -15,6 +15,13 @@ $(document).ready(function () {
     clearHistory();
     clickHistory();
     displayHistory();
+
+    var updateTime = function () {
+      var timer = moment().format("LTS");
+      $("#timer").html(timer);
+    };
+    updateTime();
+    setInterval(updateTime, 1000);
   }
 
   function WeatherLook() {

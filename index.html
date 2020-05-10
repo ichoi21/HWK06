@@ -10,7 +10,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="./assets/styles.css" />
-    <title>Weather Dashboard</title>
+    <title>Weather Search App</title>
   </head>
   <body>
     <header
@@ -19,21 +19,21 @@
       <h3 class="text-light font-weight-bold">Weather Dashboard</h3>
     </header>
 
-    <div class="container-fluid h-100">
+    <div class="container-fluid h-80">
       <div class="row min-vh-100">
         <!-- Left User Input/History -->
-        <div class="col-md-4 bg-light">
+        <div class="col-md-3 bg-light">
           <div class="row">
-            <div class="col-md-8" id="city-search">
+            <div class="col-md-10" id="city-search">
               <label class="font-weight-bold pt-2" for="city-search"
                 >Search for a City:</label
               >
-              <div class="form mb-3">
+              <div class="form mb-3 shadow-lg">
                 <form>
                   <input
                     type="text"
                     id="citySearch"
-                    placeholder="Enter City Name"
+                    placeholder="  Enter City Name"
                   />
                   <button
                     class="btn btn-outline-primary fas fa-search"
@@ -46,10 +46,10 @@
           </div>
           <!-- history log -->
           <div class="row">
-            <div class="col-md-8 h-100 pb-3" id="history">
+            <div class="col-md-10 h-100 pb-3" id="history">
               <div class="card w-100">
                 <ul
-                  class="list-group list-group-flush"
+                  class="list-group list-group-item-action"
                   id="search-history"
                 ></ul>
               </div>
@@ -59,6 +59,11 @@
                   id="btnClear"
                 ></button>
               </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-10 text-center" id="clock">
+              <h3><span class="badge badge-danger text-weight-bold shadow-lg" id="timer"></span></h3>
             </div>
           </div>
         </div>
@@ -183,6 +188,7 @@
     <script
       src="https://kit.fontawesome.com/a361b2e3ef.js"
     ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.25.3/moment.min.js"></script>
     <script src="./assets/app.js"></script>
   </body>
 </html>
